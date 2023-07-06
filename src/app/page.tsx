@@ -1,95 +1,35 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import React from "react";
+import { netHomeData } from "@/server/home";
+import { EnumPosition } from "@/typings/home.interface";
+import PcHome from "@/components/PcHome/PcHome";
+import MHome from "@/components/Home/MHome";
+import { ownOs } from "@/utils/ownOs";
+import { headers } from "next/headers";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+const Home = async () => {
+  const { homeData, isPc, bannerList } = await getData();
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+  console.log('ispc', isPc)
+  return <>
+    12333
+    <br/>
+    <Link href={'/test'}>Test</Link>
+    {/*{isPc ? <PcHome homeData={homeData} bannerList={bannerList}/> : <MHome homeData={homeData} bannerList={bannerList}/>}*/}
+  </>
 }
+
+export const getData = async () => {
+  const bookInfo = await netHomeData();
+  const ua = headers().get('user-agent') || '';
+  const bannerList = (bookInfo || []).find(item => item.position === EnumPosition.顶部banner)?.bookList ?? [];
+  // 返回的参数将会按照 key 值赋值到 Home 组件的同名入参中
+  return {
+    homeData: bookInfo || [],
+    bannerList,
+    isPc: !!ownOs(ua).isPc,
+  }
+}
+
+export default Home

@@ -1,0 +1,31 @@
+.titleWrap {
+  height: 1.06rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 0.36rem;
+  color: #2F3031;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.moreBox {
+  display: flex;
+  align-items: center;
+  /*width: 1.26rem;*/
+  padding: 0.2rem 0 0.2rem 0.2rem;
+  font-size: 0.26rem;
+  color: rgba(47, 48, 49, 1);
+  /*font-weight: 300 !important;*/
+}
+
+.moreIcon {
+  width: 0.22rem;
+  height: 0.22rem;
+}

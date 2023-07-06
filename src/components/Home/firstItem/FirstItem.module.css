@@ -1,0 +1,44 @@
+.firstItemWrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 0.4rem;
+}
+
+.imageItem1Wrap {
+  width: 1.8rem;
+  height: 100%;
+  margin-bottom: 0.4rem;
+}
+
+.bookImage {
+  width: 100%;
+  height: 2.38rem;
+  border-radius: 0.08rem;
+  overflow: hidden;
+  margin-bottom: 0.16rem;
+}
+
+.bookName {
+  height: 0.76rem;
+  width: 1.8rem;
+  color: #2F3031;
+  font-size: 0.26rem;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-wrap: break-word;
+  line-height: 0.38rem;
+}
+
+.author {
+  width: 1.8rem;
+  color: #2F3031;
+  font-size: 0.24rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.5;
+}
